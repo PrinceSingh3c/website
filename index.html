@@ -5,11 +5,98 @@
 <head>
     <meta charset="utf-8">
     <title>Filterable Image Gallery Bootstrap | CodingbyJarnail</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <!-- <link rel="stylesheet" href="2style.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
+    <style>
+        /* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f1f1f1 !important;
+}
+
+body .container {
+  max-width: 1100px;
+}
+
+#filter-buttons button {
+  border-radius: 3px;
+  background: #fff;
+  border-color: transparent;
+}
+
+#filter-buttons button:hover {
+  background: #ddd;
+}
+
+#filter-buttons button.active {
+  color: #fff;
+  background: #6c757d;
+}
+
+#filterable-cards .card {
+  width: 15rem;
+  border: 2px solid transparent;
+}
+
+#filterable-cards .card.hide {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  #filterable-cards {
+    justify-content: center;
+  }
+
+  #filterable-cards .card {
+    width: calc(100% / 2 - 10px);
+  }
+}
+
+
+
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+
+/* sign up button css started */
+
+
+
+
+    </style>
 </head>
 
 <body>
@@ -387,6 +474,41 @@
         </div>
 
     </div>
+
+
+    <script>
+        // Select relevant HTML elements
+const filterButtons = document.querySelectorAll("#filter-buttons button");
+const filterableCards = document.querySelectorAll("#filterable-cards .card");
+
+// Function to filter cards based on filter buttons
+const filterCards = (e) => {
+    document.querySelector("#filter-buttons .active").classList.remove("active");
+    e.target.classList.add("active");
+
+    filterableCards.forEach(card => {
+        // show the card if it matches the clicked filter or show all cards if "all" filter is clicked
+        if(card.dataset.name === e.target.dataset.filter || e.target.dataset.filter === "all") {
+            return card.classList.replace("hide", "show");
+        }
+        card.classList.add("hide");
+    });
+}
+
+filterButtons.forEach(button => button.addEventListener("click", filterCards));
+
+
+
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+    </script>
 
 
 </body>
